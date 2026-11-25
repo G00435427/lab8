@@ -33,6 +33,13 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+app.delete('/api/movie/:id', async (req, res) => {
+  
+        console.log('Deleting movie with ID:', req.params.id);
+        const movie = await Movie.findByIdAndDelete(req.params.id);
+        res.status(200).send({ message: "Movie deleted successfully", movie });
+        console.log("deleted Movie with id "+req.params.id);
+    });
 
 app.get('/api/movies', async (req, res) => {
   const movies = await Movie.find({});
